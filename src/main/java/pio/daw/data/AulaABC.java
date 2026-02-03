@@ -5,8 +5,6 @@ import java.util.List;
 abstract class AulaABC {
 	List<AlumnoABC> alumnos;
 
-	
-
 	public AulaABC(List<AlumnoABC> alumnos) {
 		this.alumnos = alumnos;
 	}
