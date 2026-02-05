@@ -142,9 +142,9 @@ public class Aula extends AulaABC implements EstadisticaBasica, Graficable {
         System.out.printf("%-18s -> %s: %.2f\n", "Mejor Alumno", bestAlumno.getNombre(), Estadistica.media(bestAlumno.getNotas()));
         System.out.printf("%-18s -> %s: %.2f\n", "Peor Alumno" ,wostAlumno.getNombre(), Estadistica.media(wostAlumno.getNotas()));
         System.out.printf("%-18s -> %.2f\n", "Media de la clase", this.getMedia());
-        System.out.printf("%-18s -> %.2f\n", "Máximo de la clase", this.getMedia());
-        System.out.printf("%-18s -> %.2f\n", "Media de la clase", this.getMedia());
-        System.out.printf("%-18s -> %.2f\n\n", "Media de la clase", this.getMedia());
+        System.out.printf("%-18s -> %.2f\n", "Máximo de la clase", this.getMax());
+        System.out.printf("%-18s -> %.2f\n", "Mínimo de la clase", this.getMin());
+        System.out.printf("%-18s -> %.2f\n\n", "Varianza de la clase", this.getVar());
     }
 
     /**
