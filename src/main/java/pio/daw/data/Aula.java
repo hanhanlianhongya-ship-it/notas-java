@@ -1,6 +1,5 @@
 package pio.daw.data;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,13 +21,13 @@ public class Aula extends AulaABC implements EstadisticaBasica, Graficable {
      */
     public static Aula fromFile(Path path){
         List<AlumnoABC> alumnos = new ArrayList<>();
-        try(BufferedReader reader = Files.newBufferedReader(path)){ 
+        try{ 
             //// Otra Manera
             // String line = null;
             // while( (line = reader.readLine()) != null){
             //     alumnos.add(Alumno.fromLine(line));
             // }
-            for(String line : reader.readAllLines()){
+            for(String line : Files.readAllLines(path)){
                 alumnos.add(Alumno.fromLine(line));
             }
         } catch (IOException e) {
@@ -65,32 +64,51 @@ public class Aula extends AulaABC implements EstadisticaBasica, Graficable {
     }
 
 	public AlumnoABC getWorstAlumno(){
-        //TODO
-        return null;
+        AlumnoABC worstAlumno = null;
+        Double worstMedia = 10.;
+        for(AlumnoABC a : this.getAlumnos()){
+            Double media = Estadistica.media(a.getNotas());
+            if (media < worstMedia){
+                worstAlumno = a;
+                worstMedia = media;
+            }
+        }
+        return worstAlumno;
+    }
+
+    private List<Double> getAllNotes(){
+        List<Double> notas = new ArrayList<>();
+        for(AlumnoABC a : this.getAlumnos()){
+            notas.addAll(a.getNotas());
+        }
+        return notas;
     }
 
 	public Double getMedia(){
-        //TODO
-        return null;
+        return Estadistica.media(this.getAllNotes());
     }
 
 	public Double getMax(){
-        //TODO
-        return null;
+        return Estadistica.max(this.getAllNotes());
     }
 
 	public Double getMin(){
-        //TODO
-        return null;
+        return Estadistica.min(this.getAllNotes());
     }
 
 	public Double getVar(){
-        //TODO
-        return null;
+        return Estadistica.var(this.getAllNotes());
     }
 
     public void printAulaStats(){
-        //TODO
+        AlumnoABC bestAlumno = this.getBestAlumno();
+        AlumnoABC wostAlumno = this.getWorstAlumno();
+        System.out.printf("%-18s -> %s: %.2f\n", "Mejor Alumno", bestAlumno.getNombre(), Estadistica.media(bestAlumno.getNotas()));
+        System.out.printf("%-18s -> %s: %.2f\n", "Peor Alumno" ,wostAlumno.getNombre(), Estadistica.media(wostAlumno.getNotas()));
+        System.out.printf("%-18s -> %.2f\n", "Media de la clase", this.getMedia());
+        System.out.printf("%-18s -> %.2f\n", "Máximo de la clase", this.getMedia());
+        System.out.printf("%-18s -> %.2f\n", "Media de la clase", this.getMedia());
+        System.out.printf("%-18s -> %.2f\n", "Media de la clase", this.getMedia());
     }
 
     public void printBarPlot(){
