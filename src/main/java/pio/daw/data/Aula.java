@@ -41,6 +41,11 @@ public class Aula extends AulaABC implements EstadisticaBasica, Graficable {
 		super(alumnos);
 	}
 
+    /**
+     * Obtiene un alumno a partir de su nombre.
+     * @param nombre Nombre del alumno que se quiere obtener
+     * @return Alumno o null si no se encuentra
+     */
     public AlumnoABC getAlumno(String nombre){
         for(AlumnoABC a : this.getAlumnos()){
             if(a.getNombre().equals(nombre)){
@@ -50,6 +55,10 @@ public class Aula extends AulaABC implements EstadisticaBasica, Graficable {
         return null;
     }
 
+    /**
+     * Devuelve el alumno con mejor media
+     * @return Alumno con mejor media.
+     */
 	public AlumnoABC getBestAlumno(){
         AlumnoABC mejorAlumno = null;
         Double bestMedia = 0.;
@@ -63,6 +72,10 @@ public class Aula extends AulaABC implements EstadisticaBasica, Graficable {
         return mejorAlumno;
     }
 
+    /**
+     * Devuelve el alumno con peor media
+     * @return Alumno con peor media.
+     */
 	public AlumnoABC getWorstAlumno(){
         AlumnoABC worstAlumno = null;
         Double worstMedia = 10.;
@@ -84,22 +97,42 @@ public class Aula extends AulaABC implements EstadisticaBasica, Graficable {
         return notas;
     }
 
+    /**
+     * Devuelve la media global de la clase.
+     * @return Media clase
+     */
 	public Double getMedia(){
         return Estadistica.media(this.getAllNotes());
     }
 
+    /**
+     * Devuelve la máximo global de la clase.
+     * @return Máximo clase
+     */
 	public Double getMax(){
         return Estadistica.max(this.getAllNotes());
     }
 
+    /**
+     * Devuelve el mínimo global de la clase.
+     * @return Mínimo clase
+     */
 	public Double getMin(){
         return Estadistica.min(this.getAllNotes());
     }
 
+    /**
+     * Devuelve la varianza global de la clase.
+     * @return Varianza clase
+     */
 	public Double getVar(){
         return Estadistica.var(this.getAllNotes());
     }
 
+    /**
+     * Imprime en consola las estadísticas de toda la clase: Mejor y peor alumno,
+     * media, máximo, mínimo y varianza
+     */
     public void printAulaStats(){
         AlumnoABC bestAlumno = this.getBestAlumno();
         AlumnoABC wostAlumno = this.getWorstAlumno();
