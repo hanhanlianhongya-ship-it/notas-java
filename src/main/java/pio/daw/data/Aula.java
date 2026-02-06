@@ -154,7 +154,7 @@ public class Aula extends AulaABC implements EstadisticaBasica, Graficable {
         System.out.printf("%1$s%2$sNOTAS%2$s%1$s\n\n", "* * * * *", "   ");
         for (AlumnoABC a : this.getAlumnos()){
             Integer mediaRedondeada = (int) Math.round(Estadistica.media(a.getNotas()));
-            System.out.printf("%-20s |%s\n", a.getNombre(), String.join(" ", Collections.nCopies(mediaRedondeada, "*")));
+            System.out.printf("%-20s |%s\n", a.getNombre(), "* ".repeat(mediaRedondeada));
         }
     }
 
